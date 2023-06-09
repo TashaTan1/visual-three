@@ -7,10 +7,9 @@
 *
 ***************************************************************************************/
 
-//press space to reset - codepen challenge - rain
-
+//variables
 let three;
-let drops = []; //let there be drops
+let drops = []; 
 let timer = 5;
 let button;
 
@@ -20,31 +19,32 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL); //to fall within this space
-  setAttributes("alpha", true); //allowed to fade
+  createCanvas(windowWidth, windowHeight, WEBGL); 
+  setAttributes("alpha", true);
   three.play();
   three.loop();
 }
 function draw() {
-  t = frameCount / 4000 + 50; //and move in time
-  background(255, 255, 255, 255 * abs(cos(t / 2))); //with the light of day
-  orbitControl(); //in your perspective
-  rotateX(t / 2); //that turns
-  rotateY(t / 3); //on
-  rotateZ(t / 4); //these axes
+  //animation for visual
+  t = frameCount / 4000 + 50; 
+  background(255, 255, 255, 255 * abs(cos(t / 2))); 
+  orbitControl(); 
+  rotateX(t / 2); 
+  rotateY(t / 3);
+  rotateZ(t / 4); 
 
   if (drops.length < 105) {
-    //less is more
-    drops.push(new Drops()); //more is more
+    
+    drops.push(new Drops()); 
   }
 
   for (let i = 0; i < drops.length; i++) {
-    drops[i].display(); //a call to being
+    drops[i].display(); 
     if (drops[i].r > 255) {
-      drops.splice(i, 1); //a call to cease
-
+      drops.splice(i, 1); 
+//timer
       if (frameCount % 60 == 0 && timer > 0) {
-        // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+      
         timer--;
       }
       //  console.log(timer);
@@ -59,7 +59,7 @@ function draw() {
         button.position(425, height/2);
         button.mousePressed(function goToAnotherPage() {
           window.location.href =
-            "https://editor.p5js.org/natashatan/sketches/gxSMDJpDT";
+            "https://tashatan1.github.io/let-s-breath/";
         });
       }
     }
@@ -68,14 +68,14 @@ function draw() {
 
 class Drops {
   constructor() {
-    this.x = random(-width / 2, width / 2); //we all have coordinates
+    this.x = random(-width / 2, width / 2); 
     this.y = random(-height * 2, -height / 2);
     this.z = random(-height / 2, height / 2);
-    this.s = random(1, 10); //that change
-    this.stop = random(100, height / 2); //or end
-    this.c = random(5, 10); //with filters
-    this.fall = true; //we begin at our fall
-    this.r = 0; //and grow in our death through what we leave behind
+    this.s = random(1, 10); 
+    this.stop = random(100, height / 2); 
+    this.c = random(5, 10); 
+    this.fall = true; 
+    this.r = 0; 
   }
   display() {
     if (this.y < this.stop) {
@@ -103,7 +103,7 @@ class Drops {
   }
 }
 function keyPressed() {
-  //a reset in time
+  
   if (keyCode === 32) {
     drops = [];
     setup();
